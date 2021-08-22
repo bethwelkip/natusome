@@ -5,7 +5,7 @@ from django.db import models
 
 class Customer(models.Model):
     name = models.CharField(max_length=50)
-    phone = models.CharField(max_length=15)
+    phone = models.CharField(max_length=50)
 
 
 class Content(models.Model):
@@ -13,7 +13,6 @@ class Content(models.Model):
     content = models.TextField()
     value = models.FloatField(default=100)
 
-    def get_content(self, x=5):
-        content = self.objects.order_by('value')[:x]
+    def get_content(x=10):
+        content = Content.objects.order_by('value')[:x]
         return content
-        
