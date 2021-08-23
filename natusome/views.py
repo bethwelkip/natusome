@@ -10,33 +10,49 @@ import pandas as pd
 import schedule
 import time
 
-# This initializes the database
+# This initializes the database(personal use)
 def initialize_db():
-        data = pd.read_csv('./natusome/sources/csv file name') # put file in 'sources' folder
-        data.drop(['id','known'], axis=1,inplace = True)
-        user = Customer.objects.filter(phone=config('MY_PHONE')).first()
+    # Content.objects.all().delete() # If you need to clean up the db
+    data = pd.read_csv('./natusome/sources/...') # put filename in 'sources' folder
+    data.drop(['id','known'], axis=1,inplace = True)
+    user = Customer.objects.filter(phone=config('MY_PHONE')).first()
 
-        for row in data.itertuples():
-            cont = "" + row[2] + "\n"+row[3]
-            if row[1] == 2:
-                new_content = Content(customer=user, content=cont, value = 111)
-                new_content.save()
-            else:
-                new_content = Content(customer=user, content=cont)
-                new_content.save()
+    for row in data.itertuples():
+        cont = "" + row[2] + " ***** " +row[3]
+        if row[1] == 2:
+            new_content = Content(customer=user, content=cont, value = 111)
+            new_content.save()
+        else:
+            new_content = Content(customer=user, content=cont)
+            new_content.save()
+
+# Show what I am learning on the website
+def _content():
+    user = Customer.objects.filter(phone=config('MY_PHONE')).first()
+    cont = Content.get_content(user, 10)
+    res = [("","")]
+
+    idx = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"] # used in template
+    for i, content in enumerate(cont):
+        sentence = content.content.split("*****")
+        res.append((idx[i], sentence[0]+'\n\n',sentence[1]))
+    return res[1:]
 
 # For the Home page
 def index(request):
     # uncomment the line below to initialize thhe database
     # initialize_db() 
-    return render(request, 'index.html')
+    content = _content()
+    return render(request, 'html/index.html', {'todays_content': content, 'timer':time})
+
+
 
 # Method sends actual messages. Could modify to send to as many people as needed.
 def _send_message():
     resp = Client(config('TWILIO_ACCOUNT_SID'), config('TWILIO_AUTH_TOKEN')) # get credentials from env
-    contents = Content.get_content()
+    user = Customer.objects.filter(phone=config('MY_PHONE')).first()
+    contents = Content.get_content(user)
     texts = ""
-
     for content in contents:
         value = content.value*(10**(-1/content.value))
         update = Content.objects.filter(id=content.id).first()
@@ -52,12 +68,12 @@ def _send_message():
 # At this time i am just coding the methods I will need.  I will integrate them in a bit.
 def send_message(request):
     _send_message()
-    return render(request, 'index.html')
+    return render(request, 'html/index.html')
 
 # Send messages every 11.75 hours(Keep sandbox alive)
 def schedule_message():
     _send_message()
-    schedule.every(710).minutes.do(_send_message)
+    schedule.every(110).minutes.do(_send_message)
     while True:
         schedule.run_pending()
         time.sleep(1)
@@ -109,7 +125,7 @@ def receive_message(request):
         else:
             schedule_message()
 
-    return render(request, 'index.html')
+    return render(request, 'html/index.html')
 
     def parse_content_xlsx(request, file):
         # if user submits content via website and in excel format, parse it and store it.
