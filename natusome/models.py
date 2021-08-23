@@ -13,6 +13,5 @@ class Content(models.Model):
     content = models.TextField()
     value = models.FloatField(default=100)
 
-    def get_content(x=10):
-        content = Content.objects.order_by('value')[:x]
-        return content
+    def get_content(user, x=3):   
+        return Content.objects.filter(customer = user).order_by('-value')[:x]
