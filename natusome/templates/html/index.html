@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- {% load static %} -->
+    <title>Natusome</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="robots" content="index, follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{%  static 'css/styles.css' %}">
+    <link rel="icon" href="{% static 'images/icon.ico' %}">
+    <!-- to find location of static files :
+python manage.py findstatic --verbosity 2 css/styles.css
+-->
+    <title>Natusome</title>
+</head>
+
+{% block content %}
+
+<body>
+    <section>
+        <nav style="background-color: dimgrey;">
+
+        </nav>
+    </section>
+    <section name="" id=""></section>
+    <section class="content" id="today">
+
+        {% for idx, question, answer in todays_content %}
+        <div class="{{idx}}">
+            <p><u><b>Question: </b></u>{{question}}</p>
+            <p> <u><b>Answer: </b></u>{{answer}}</p>
+        </div>
+        {% endfor %}
+
+    </section>
+</body>
+{% endblock %}
+
+</html>
