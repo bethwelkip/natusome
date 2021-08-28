@@ -136,3 +136,9 @@ def receive_message(request):
     def parse_content_anki(request, file):
         # Same as above but for csv files
         pass
+
+    # add favorite learning of the day(short)
+    def days_quote(request):
+        pass
+
+    
