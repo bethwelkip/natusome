@@ -7,7 +7,7 @@ class Customer(models.Model):
     name = models.CharField(max_length=50)
     phone = models.CharField(max_length=50)
 
-
+# consider storing the length of each content(for ranking)
 class Content(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     content = models.TextField()
