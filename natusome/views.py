@@ -45,7 +45,7 @@ def _content():
 # For the Home page
 def index(request):
     # uncomment the line below to initialize thhe database
-    initialize_db() 
+    # initialize_db() 
     content = _content()
     return render(request, 'html/index.html', {'todays_content': content, 'timer':time})
 
@@ -67,7 +67,8 @@ def _send_message():
     message = resp.messages.create(to=config('MY_PHONE'), # MY_PHONE -> My personal phone number
     from_=config('TWILIO_ASSIGNED_NO'), #The sandbox twilio number
     body=texts)
-    message.sid# send message
+    print(message.sid)# send message
+    message.sid
 
 # At this time i am just coding the methods I will need.  I will integrate them in a bit.
 def send_message(request):
