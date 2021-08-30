@@ -13,7 +13,7 @@ import time
 # This initializes the database(personal use)
 def initialize_db():
     # Content.objects.all().delete() # If you need to clean up the db
-    data = pd.read_csv('./natusome/sources/...') # put filename in 'sources' folder
+    data = pd.read_csv('./natusome/sources/cs_flashcards.csv') # put filename in 'sources' folder
     data.drop(['id','known'], axis=1,inplace = True)
     user = Customer.objects.filter(phone=config('MY_PHONE')).first()
 
