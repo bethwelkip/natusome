@@ -1,0 +1,60 @@
+{% load static %}
+{%block title %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- {% load static %} -->
+    <title>Natusome</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="robots" content="index, follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{%  static 'css/styles.css' %}">
+    <link rel="icon" href="{% static 'images/icon.ico' %}">
+    <!-- to find location of static files :
+python manage.py findstatic --verbosity 2 css/styles.css
+-->
+    <title>Natusome</title>
+</head>
+{%endblock%}
+
+<nav class="navbar navbar-inverse fixed-top" style="background-color: #FFF5EE; padding-bottom: 10px;">
+    <div class="container-fluid">
+        <div class="navbar-header text-center" style="padding-left:0%;">
+            <a class="navbar-brand text-center" href="" style="font-size:28px">Clo-Insta
+            </a>
+        </div>
+        <form class="navbar-form" role="search" action="" method="GET">
+
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search users" name="user">
+                <div class="input-group-btn" name="user">
+                    <button type="submit" name='submit' class="btn btn-primary"
+                        style="float: left;margin-bottom: 5%;">Search</button>
+                </div>
+            </div>
+
+        </form>
+        <!-- <div class="icons" style=" margin-right: 2%;"> -->
+        <a href="/" style="margin-left: 25%;"><img
+                src="https://res.cloudinary.com/dehia4hei/image/upload/v1606074217/vof9yj8dne9angfimk18.png" alt="Home"
+                height="40px"> </a>
+        <a href="" style="margin-right: 1%;"> <img
+                src="https://res.cloudinary.com/dehia4hei/image/upload/v1606066470/bn8mcmvxudmtxual7vcv.png"
+                alt="Messages" height="40px"> </a>
+        <!-- <a href="" style="margin-right: 1%;">Activity</a> -->
+        <a href="/profile" style="margin-right: 0%;"> <img
+                src="https://res.cloudinary.com/dehia4hei/image/upload/v1606090934/wxz2flawdqir8menuus3.png"
+                alt="Profile"></a>
+        <!-- </div> -->
+
+    </div>
+
+</nav>
+
+</html>
+
+{% block content %}
+
+{% endblock %}

@@ -29,7 +29,7 @@ def initialize_db():
 # Show what I am learning on the website
 def _content():
     user = Customer.objects.filter(phone=config('MY_PHONE')).first()
-    cont = Content.get_content(user, 10)
+    cont = Content.get_content(user, 5)
     res = [("","")]
 
     idx = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"] # used in template
@@ -140,5 +140,3 @@ def receive_message(request):
     # add favorite learning of the day(short)
     def days_quote(request):
         pass
-
-    
