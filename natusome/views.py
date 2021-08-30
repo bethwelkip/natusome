@@ -52,7 +52,7 @@ def _send_message():
     resp = Client(config('TWILIO_ACCOUNT_SID'), config('TWILIO_AUTH_TOKEN')) # get credentials from env
     user = Customer.objects.filter(phone=config('MY_PHONE')).first()
     contents = Content.get_content(user)
-    texts = ""
+    texts = "*"
     for content in contents:
         value = content.value*(10**(-1/content.value))
         update = Content.objects.filter(id=content.id).first()
@@ -79,7 +79,7 @@ def schedule_message():
         time.sleep(1)
 
 # Register a new user
-def register_new_user(user):
+def register_new_user(user, msg):
     new_user = Customer(name=user, phone=user)
     new_user.save()
     new_content = Content(customer=new_user.id, content=msg)
