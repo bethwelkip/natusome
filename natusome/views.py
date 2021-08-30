@@ -16,6 +16,10 @@ def initialize_db():
     data = pd.read_csv('./natusome/sources/cs_flashcards.csv') # put filename in 'sources' folder
     data.drop(['id','known'], axis=1,inplace = True)
     user = Customer.objects.filter(phone=config('MY_PHONE')).first()
+    if user is None:
+        user = Customer(name=config('MY_PHONE'), phone=config('MY_PHONE'))
+        user.save()
+
 
     for row in data.itertuples():
         cont = "" + row[2] + " ***** " +row[3]
