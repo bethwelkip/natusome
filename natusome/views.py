@@ -41,7 +41,7 @@ def _content():
 # For the Home page
 def index(request):
     # uncomment the line below to initialize thhe database
-    # initialize_db() 
+    initialize_db() 
     content = _content()
     return render(request, 'html/index.html', {'todays_content': content, 'timer':time})
 
