@@ -78,7 +78,7 @@ def send_message(request):
 # Send messages every 11.75 hours(Keep sandbox alive)
 def schedule_message():
     _send_message()
-    schedule.every(110).minutes.do(_send_message)
+    schedule.every(10).minutes.do(_send_message)
     while True:
         schedule.run_pending()
         time.sleep(1)
